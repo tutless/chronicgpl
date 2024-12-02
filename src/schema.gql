@@ -1,0 +1,65 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type TransactionObj {
+  transid: Int!
+  transjonumber: Int!
+  transtype: String
+  jodate: String
+  jodiagnosed: String
+  jorepair: String
+  jopullout: String
+  jorepaired: String
+  jodateout: String
+  customerinformed: String
+  cidate: String
+  repairaction: String
+  accessories: String
+  complain: String
+  dealer: String
+  datepurchase: String
+  labor: Int!
+  transportation: Int!
+  shippingcost: Int!
+  othercharges: Int!
+  checkupfee: String
+  discount: String
+}
+
+type UnitInfoObj {
+  uiid: Int!
+  uijonumber: Int!
+  brand: String
+  model: String
+  serialno: String
+}
+
+type JobOrderObj {
+  jonumber: Int!
+  custname: String
+  address: String
+  telno: String
+  servicetype: String
+  warrantyinfo: String
+  otherinfo: String
+  transaction: TransactionObj
+  unitinfo: [UnitInfoObj]!
+}
+
+type Query {
+  getJoborder: [JobOrderObj!]!
+}
+
+type Mutation {
+  createJobOrder(jobInput: JobOrderInput!): JobOrderObj!
+}
+
+input JobOrderInput {
+  custname: String
+  address: String
+  telno: String
+  servicetype: String
+  warrantyinfo: String
+  otherinfo: String
+}
