@@ -3,6 +3,7 @@ import { UnitinfoService } from './unitinfo.service';
 import { Mongoose } from 'mongoose';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UnitInfoSchema, UnitInfo } from 'src/schemas/unitinfo.schema';
+import { UnitinfoResolver } from './unitinfo.resolver';
 
 @Module({
   imports:[
@@ -15,7 +16,7 @@ import { UnitInfoSchema, UnitInfo } from 'src/schemas/unitinfo.schema';
     ])
 
   ],
-  providers: [UnitinfoService],
+  providers: [UnitinfoService, UnitinfoResolver],
   exports:[UnitinfoService]
 })
 export class UnitinfoModule {}

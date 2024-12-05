@@ -7,6 +7,9 @@ import { JoborderModule } from './joborder/joborder.module';
 import { GraphqlModule } from './graphql/graphql.module';
 import { TransactionModule } from './transaction/transaction.module';
 import { UnitinfoModule } from './unitinfo/unitinfo.module';
+import { JobcompleteService } from './jobcomplete/jobcomplete.service';
+import { JobcompleteResolver } from './jobcomplete/jobcomplete.resolver';
+import { JobcompleteModule } from './jobcomplete/jobcomplete.module';
 
 @Module({
   imports: [
@@ -27,8 +30,9 @@ import { UnitinfoModule } from './unitinfo/unitinfo.module';
     GraphqlModule,
     TransactionModule,
     UnitinfoModule,
+    JobcompleteModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, JobcompleteService, JobcompleteResolver],
 })
 export class AppModule {}

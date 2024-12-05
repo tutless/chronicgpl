@@ -6,6 +6,7 @@ import { PubSub } from 'graphql-subscriptions';
 import { Inject } from '@nestjs/common';
 import { JobOrderInput } from 'src/graphql/joborder.input';
 import { map } from 'rxjs/operators';
+import { JobCompleteObj } from 'src/graphql/job.cmplt.object';
 
 
 
@@ -13,11 +14,12 @@ import { map } from 'rxjs/operators';
 export class JoborderResolver {
     constructor(private jobOrderService:JoborderService,  @Inject('PUB_SUB') private pubSub:PubSub){}
 
+    
     @Query(returns => [JobOrderObj])
-    getJoborder(): Observable<JobOrderObj[]>{
-        return this.jobOrderService.getCompleteDetails()
-
+    getJobOrder():Observable<JobOrderObj[]>{
+        return this.jobOrderService.getJobOrderList()
     }
+    
 
     @Mutation(() => JobOrderObj)
     createJobOrder(@Args('jobInput') jobInput:JobOrderInput){

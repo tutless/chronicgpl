@@ -14,20 +14,13 @@ export class JoborderController {
         }
     }
 
-    @Get('/transaction')
-    jobOrderTransaction(){
-        return this.jobOrderService.getJobOrderWithTransaction()
-    }
+   
 
     @Get('/all')
     jobOrderAllList(){
         return this.jobOrderService.getJobOrderList()
     }
 
-    @Get('all-details')
-    jobOrderAllDetails(){
-        return this.jobOrderService.getCompleteDetails()
-    }
-
+   
 
 }

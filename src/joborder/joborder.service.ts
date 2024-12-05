@@ -12,37 +12,11 @@ import {sortBy} from "lodash"
 @Injectable()
 export class JoborderService {
     constructor(
-        @InjectModel(JobOrder.name) private JobOrderModel:Model<JobOrder>, 
-        private transactionService:TransactionService, 
-        private unitInfoService:UnitinfoService){}
+        @InjectModel(JobOrder.name) private JobOrderModel:Model<JobOrder>){}
 
     getJobOrderList(){
-        return defer(async () => await this.JobOrderModel.find().lean())
-    }
-
-    getJobOrderWithTransaction(){
-       return this.getJobOrderList().pipe(mergeMap((joborder) => from(joborder)
-       .pipe(mergeMap((hasTransaction) => this.transactionService.getTransactionByJobNumber(hasTransaction.jonumber)
-       .pipe(map((transaction) => {
-        return {
-            ...hasTransaction,
-            transaction
-
-        }
-       }))),toArray())))
-         
-    }
-
-    getCompleteDetails(){
-       return this.getJobOrderList()
-        .pipe(mergeMap((joborder) => from(joborder)
-        .pipe(mergeMap((hasJoborder) => forkJoin({transaction:this.transactionService.getTransactionByJobNumber(hasJoborder.jonumber), unitinfo: this.unitInfoService.getUnitInfoByJobOrder(hasJoborder.jonumber)})
-        .pipe(map((result) => {
-            return {
-                ...hasJoborder,
-                ...result
-            }
-        }))),toArray())))
+        const promJObOrder = async ()  => await this.JobOrderModel.find().lean()
+        return from(promJObOrder());
     }
 
     getlastJoNumber(){

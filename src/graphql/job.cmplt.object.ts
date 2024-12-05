@@ -3,7 +3,7 @@ import { TransactionObj } from './transaction.object'
 import { UnitInfoObj } from './unitinfo.object'
 
 @ObjectType()
-export class JobOrderObj{
+export class JobCompleteObj{
 
    
     @Field(type => Int)
@@ -26,4 +26,11 @@ export class JobOrderObj{
     
     @Field({nullable:true})
     otherinfo?:string
+
+    @Field({nullable:true})
+    transaction:TransactionObj
+
+    @Field(() => [UnitInfoObj],{nullable:"items"})
+    unitinfo:UnitInfoObj[]
+
 }

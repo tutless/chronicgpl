@@ -3,6 +3,7 @@ import { TransactionService } from './transaction.service';
 import { Mongoose } from 'mongoose';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Transaction, TransactionSchema } from 'src/schemas/transaction.schema';
+import { TransactionResolver } from './transaction.resolver';
 
 @Module({
   imports:[
@@ -16,7 +17,7 @@ import { Transaction, TransactionSchema } from 'src/schemas/transaction.schema';
     )
 
   ],
-  providers: [TransactionService],
+  providers: [TransactionService, TransactionResolver],
   exports:[TransactionService]
 })
 export class TransactionModule {}

@@ -4,8 +4,6 @@ import { MongooseModule } from '@nestjs/mongoose';
 import {JobOrder, JobOrderSchema} from '../schemas/joborder.schema'
 import { JoborderResolver } from './joborder.resolver';
 import { JoborderController } from './joborder.controller';
-import { TransactionModule } from 'src/transaction/transaction.module';
-import { UnitinfoModule } from 'src/unitinfo/unitinfo.module';
 import { PubSub } from 'graphql-subscriptions';
 
 const pubSub = new PubSub()
@@ -19,8 +17,7 @@ const pubSub = new PubSub()
 
       }
     ]),
-    TransactionModule,
-    UnitinfoModule
+   
 
   ],
   providers: [
@@ -31,6 +28,7 @@ const pubSub = new PubSub()
       useValue: pubSub
     }
   ],
-  controllers: [JoborderController]
+  controllers: [JoborderController],
+  exports:[JoborderService]
 })
 export class JoborderModule {}
